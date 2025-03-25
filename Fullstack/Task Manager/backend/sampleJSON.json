@@ -1,0 +1,12 @@
+{
+    "name": "Peter",
+
+    "id_credentials": {
+        "id_number" : 28845013,
+
+        "location": {
+            "location": "mwiko",
+            "sub_location": "mwiko east"
+        }
+    }
+}
