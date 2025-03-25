@@ -1,10 +1,14 @@
-import { name, age } from "./modules/message"
+import React from "react";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
+import LandingPage from "./components/LandingPage";
 
 function App() {
 	return (
-		<>
-			<h1 className="underline text-red-800">Welcome to task manager {name}</h1>
-		</>
+		<Router>
+			<Routes>
+				<Route path="/" element={<LandingPage />} />
+			</Routes>
+		</Router>
 	);
 }
 

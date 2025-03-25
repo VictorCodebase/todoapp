@@ -25,8 +25,10 @@ with app.app_context():
 @app.route("/register", methods=["POST"])
 def register():
     data = request.get_json()
+    
     if User.query.filter_by(username=data["username"]).first():
         return jsonify({"msg": "Username already exits, choose another name!"}), 400
+    
     user = User(username =data["username"], password=data["password"])
     db.session.add(user)
     db.session.commit()
