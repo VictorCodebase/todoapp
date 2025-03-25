@@ -55,7 +55,7 @@ def add_task():
     task = Task(
         title=data["title"],
         description=data.get("description"),
-        start_time=start_time,
+        start_time=start_time,  
         duration=data["duration"],
         done=data.get("done", False),
         user_id=user_id
