@@ -6,6 +6,7 @@ const api = axios.create({
   headers: { 'Content-Type': 'application/json' },
 });
 
+
 export const registerUser = (user: { username: string; password: string }) =>
   api.post<AuthResponse>('/register', user);
 
@@ -17,3 +18,11 @@ export const addTask = (task: TaskCreatePayload, token: string) =>
 
 export const getTasks = (token: string) =>
   api.get<Task[]>('/tasks', { headers: { Authorization: `Bearer ${token}` } });
+
+export const updateTask = (taskId: string, updatedTask: Partial<Task>, token: string) =>
+	api.put(`/tasks/${taskId}`, updatedTask, { headers: { Authorization: `Bearer ${token}` } });
+
+export const deleteTask = (taskId: number, token: string) => 
+  api.delete(`/tasks/${taskId}`, {headers: {Authorization: `Bearer  ${token}`}});
+
+//! API.TS

@@ -65,6 +65,47 @@ def add_task():
     db.session.commit()
     return jsonify({"msg": "Task added"}), 201
 
+
+#! modify task
+@app.route("/tasks/<task_id>", methods=["PUT"])
+@jwt_required()
+def update_task(task_id):
+    if not task_id:
+        return jsonify({"msg": "id not specified"}), 400
+    
+    task = Task.query.filter_by(id=task_id).first()
+
+    if not task:
+        return jsonify({"msg": "Task not found"}), 404
+    
+    data = request.get_json()
+
+    task.title = data.get("title", task.title)
+    task.description = data.get("description", task.description)
+    task.duration = data.get("duration", task.duration)
+    task.done = data.get("done", task.done)
+
+    db.session.commit()
+    return jsonify({"msg": "Task updated successfully"})
+
+
+#! Add delete task
+@app.route("/tasks/<task_id>", methods=["DELETE"])
+@jwt_required()
+def delete_tasks(task_id):
+    if not task_id:
+        return jsonify({"msg": "id not specified"}), 400
+
+    task = Task.query.filter_by(id=task_id).first()
+
+    if not task:
+        return jsonify({"msg": "task specified does not exist"}), 404
+
+    db.session.delete(task)
+    db.session.commit()
+    return jsonify({"msg": "Task deleted"}), 200
+
+
 @app.route("/tasks", methods=["GET"])
 @jwt_required()
 def get_tasks():
